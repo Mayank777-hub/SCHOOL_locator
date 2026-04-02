@@ -1,19 +1,25 @@
 const mysql = require('mysql2');
-const env = require("dotenv");
-env.config();
-const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:process.env.SQL_Password,
-    database:"SCHOOLS"
-})
+require("dotenv").config();
 
-db.connect((err)=>{
- if (err) {
-    console.log("The error is", err); // may be sql databse name not correct
-  } else {
-    console.log("MySQL Connected");
-  }
-});
+let db;
+try {
+  db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: process.env.SQL_Password,
+    database: "SCHOOLS"
+  });
 
-module.exports=db;
+  db.connect((err) => {
+    if (err) {
+      console.log("DB not connected ");
+    } else {
+      console.log("MySQL Connected ");
+    }
+  });
+
+} catch (error) {
+  console.log("DB completely skipped ");
+}
+
+module.exports = db;
