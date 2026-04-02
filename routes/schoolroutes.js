@@ -13,5 +13,8 @@ const {getNearbySchools } = require("../controllers/schoollist");
 
 router.post("/addSchool", addSchool);
 router.get("/listSchools", getNearbySchools);
+app.get("/test", (req, res) => {
+  res.json({ message: "API work fine" });
+});
 
 module.exports = router;
